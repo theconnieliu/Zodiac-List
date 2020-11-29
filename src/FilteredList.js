@@ -1,59 +1,96 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
-import { Navbar } from 'react-bootstrap';   
-import DisplayList from './DisplayList';
+import React, { useState, useEffect } from 'react';
 
-class FilteredList extends Component {
-    
-    // inside constructor
-    this.state = {
-		element: All
-	};
+const FilteredList = (props) => {
+    const { list, setDisplayList } = props;
 
-    onSelectFilterElement = event => {
-        this.setState({
-            size: event
-        })
-    };
+    // Is blank for no filter
+    // Otherwise filter by Water, Earth, Wood, Fire, or Metal
+    const [filterByElement, setFilterByElement] = useState('');
 
-    matchesFilterElement = item => {
-        // all items should be shown when no filter is selected
-        if(this.state.size === All) { 
-            return true
-        } else if (this.state.size === item.size) {
-            return true
+    // Is blank for no filter
+    // Otherwise filter by Yin, Yang
+    const [filterByAlignment, setFilterByAlignment] = useState('');
+
+    // If true, preserves original order (already ordered by race)
+    // Otherwise, reverse order
+    const [sortByRace, toggleSortByRace] = useState(true);
+
+    const refreshDisplay = () => {
+        let newDisplayList = [...list];
+
+        if (filterByElement !== '') {
+            newDisplayList = newDisplayList.filter(item => item.element === filterByElement);
+        }
+
+        if (filterByAlignment !== '') {
+            newDisplayList = newDisplayList.filter(item => item.alignment === filterByAlignment);
+        }
+
+        if (!sortByRace) {
+            newDisplayList.sort((a, b) => b.raceIndex - a.raceIndex);
+        }
+
+        setDisplayList(newDisplayList);
+    }
+
+    useEffect(refreshDisplay, [filterByElement, filterByAlignment, sortByRace])
+
+    const resetDisplay = () => {
+        setFilterByElement("");
+        setFilterByAlignment("");
+        toggleSortByRace(true);
+    }
+
+    const handleElementChange = (event) => {
+        setFilterByElement(event.target.value);
+    }
+
+    const handleAlignmentChange = (event) => {
+        setFilterByAlignment(event.target.value);
+    }
+
+    const handleRaceChange = (event) => {
+        if (event.target.value === "Preserve order") {
+            toggleSortByRace(true);
         } else {
-            return false
+            toggleSortByRace(false);
         }
     }
 
-    render() {
-		return (
+    return (
+        <body>
+        <h1>Choose Your Chinese Zodiac Race Team</h1>
+        <div className="menu-bar">
             <div>
-                <div>
-                    <Navbar bg="light" expand="lg">
-                        <Nav.Item><Nav.Link eventKey="All" onSelect={this.onSelectFilterElement}>All</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Water" onSelect={this.onSelectFilterElement}>Water</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Fire" onSelect={this.onSelectFilterElement}>Fire</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Wood" onSelect={this.onSelectFilterElement}>Wood</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Metal" onSelect={this.onSelectFilterElement}>Metal</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Earth" onSelect={this.onSelectFilterElement}>Earth</Nav.Link></Nav.Item>
-                    </Navbar>
-
-                    <Navbar bg="light" expand="lg">
-                        <Nav.Item><Nav.Link eventKey="All" onSelect={this.onSelectFilterSize}>All</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Yin" onSelect={this.onSelectFilterSize}>Yin</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="Yang" onSelect={this.onSelectFilterSize}>Yang</Nav.Link></Nav.Item>
-                    </Navbar>
-                </div>
-
-                <DisplayList list={this.props.list.filter(this.matchesFilterSize)}/>
-
+            <span className="menu-label">Filter by Celestial Element</span>
+            <select value={filterByElement} onChange={handleElementChange}>
+                <option value="">All</option>
+                <option value="Water">Water</option>
+                <option value="Earth">Earth</option>
+                <option value="Wood">Wood</option>
+                <option value="Fire">Fire</option>
+                <option value="Metal">Metal</option>
+            </select>
             </div>
-        );
-	}
+            <div>
+            <span className="menu-label">Filter by Yin Yang Alignment</span>
+            <select value={filterByAlignment} onChange={handleAlignmentChange}>
+                <option value="">All</option>
+                <option value="Yin">Yin</option>
+                <option value="Yang">Yang</option>
+            </select>
+            </div>
+            <div>
+            <span className="menu-label">Sort by Race Order</span>
+            <select value={sortByRace ? 'Preserve order' : 'Reverse order'} onChange={handleRaceChange}>
+                <option value="Preserve order">Preserve order</option>
+                <option value="Reverse order">Reverse order</option>
+            </select>
+            </div>
+            <button onClick={resetDisplay}>Reset All Filters</button>
+        </div>
+        </body>
+    );
 }
 
-export default FilteredList
-
-  
+export default FilteredList;

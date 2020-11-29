@@ -1,22 +1,63 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+
 
 class DisplayList extends Component {
-        
-        render() {
-		    return (
-                <div>
-                    {this.props.list.map(item => 
-                    <div className="zodiac-card">
-                        <span className="zodiac-header">{item.name}</span>
-                        <span>{item.element}</span>
-                        <span>{item.alignment}</span>
+    constructor(props){
+        super(props);
+        this.state = {
+            ignored: this.props.list.map(animal => animal.raceIndex)
+        };
+    }
+
+    isIgnored(raceIndex) {
+        return this.state.ignored.some(item => item === raceIndex);
+    }
+    
+    render() {
+        const {list} = this.props;
+
+        const handleRemove = (raceIndex) => () => {
+            if(this.isIgnored(raceIndex)) {
+                this.setState({
+                    ignored: this.state.ignored.filter(item => item !== raceIndex)
+                });
+            } else {
+                this.setState({
+                    ignored: [...this.state.ignored, raceIndex]
+                })
+            }
+        }
+
+        return (
+            
+            <div className="main-container">
+                <div className="aggregate-announce">
+                <h2>Number of Combined Celestial Legs is... <span className="total-legs">{list.reduce((total, animal) => {
+                    if(this.isIgnored(animal.raceIndex)) {
+                        return total;
+                    }
+                    return total + animal.numLegs;
+                    }, 0)}</span></h2>
+                {list.length === 0 && (
+                    <span>No Animals Bro</span>
+                )}
+                </div>
+
+                <div className="card-container">
+                {list.map((item, index) =>
+                    <div key={index} className={`zodiac-card ${this.isIgnored(item.raceIndex) ? "" : "highlighted"}`} onClick={handleRemove(item.raceIndex)}>
+                        <img src={item.svg}/>
+                        <br></br>
+                        <span className={`zodiac-header ${this.isIgnored(item.raceIndex) ? "" : "bolded"}`}>{item.name}</span>
+                        <span>Element: {item.element}</span>
+                        <span>Alignment: {item.alignment}</span>
+                        <span>Race Number: {item.raceIndex}</span>
+                        <span>Number of Legs: {item.numLegs}</span>
                     </div>)}
                 </div>
-            );
-	    }
+            </div>
+        );
+    }
 }
 
-
 export default DisplayList
-

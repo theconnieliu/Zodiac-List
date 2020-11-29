@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+body, html{
+    margin:0;
+    width:100%;
+  } 
+
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Cairo', sans-serif;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+select {
+    appearance: none; 
+    outline: 0; 
+    border-radius: 15px;
+    border-width: 3px;
+    padding: 8px;
+    font-family: 'Cairo', sans-serif;
+    border-color: #FFB200;
+    background-color: #C24023;
+    color: #FFB200;
+   
+}
+
+.card-container, body, .main-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #AA381E;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.zodiac-card {
+    background-color: #FFF0D9;
+    border-radius: 15px;
+    padding: 20px;
+    width: 15%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+}
+
+.highlighted {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 4px rgba(0, 0, 0, 0.25), -4px 5px 4px rgba(0, 0, 0, 0.25);
+    font-weight: 800;
+    box-shadow: 0 0 0 5pt #52AFA4;
+    
+}
+.bolded {
+    font-weight: bold;
+}
+
+.img {
+    width: 20px;
+    height: 20px;
+}
+
+h1, h2, .menu-bar, span, p {
+    font-family: 'Cairo', sans-serif;
+    color: #FFB200;
+}
+
+.menu-label {
+    padding: 10px;
+}
+
+h1, .aggregate-announce {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.zodiac-card > span{
+    color: #AA381E;
+}
+
+button {
+    background-color: #52AFA4;
+    border: none;
+    color: #FFF0D9;
+    border-radius: 15px;
+    font-family: 'Cairo', sans-serif;
+    padding: 10px;
+}
