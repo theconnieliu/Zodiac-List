@@ -42,17 +42,19 @@ class DisplayList extends Component {
                     <span>No Animals Bro</span>
                 )}
                 </div>
-
+                <br></br>
                 <div className="card-container">
                 {list.map((item, index) =>
-                    <div key={index} className={`zodiac-card ${this.isIgnored(item.raceIndex) ? "" : "highlighted"}`} onClick={handleRemove(item.raceIndex)}>
+                    <div key={index} className={`zodiac-card ${this.isIgnored(item.raceIndex) ? "" : "highlighted"}`}>
                         <img src={item.svg}/>
                         <br></br>
-                        <span className={`zodiac-header ${this.isIgnored(item.raceIndex) ? "" : "bolded"}`}>{item.name}</span>
+                        <span><b>{item.name}</b></span>
                         <span>Element: {item.element}</span>
                         <span>Alignment: {item.alignment}</span>
                         <span>Race Number: {item.raceIndex}</span>
                         <span>Number of Legs: {item.numLegs}</span>
+                        <br></br>
+                        <button onClick={handleRemove(item.raceIndex)}>Add/Remove</button>
                     </div>)}
                 </div>
             </div>

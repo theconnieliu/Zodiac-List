@@ -28,7 +28,7 @@ select {
    
 }
 
-.card-container, body, .main-container {
+.card-container, body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -52,7 +52,6 @@ select {
 
 .highlighted {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 4px rgba(0, 0, 0, 0.25), -4px 5px 4px rgba(0, 0, 0, 0.25);
-    font-weight: 800;
     box-shadow: 0 0 0 5pt #52AFA4;
     
 }
@@ -94,4 +93,8 @@ button {
     border-radius: 15px;
     font-family: 'Cairo', sans-serif;
     padding: 10px;
+}
+
+.zodiac-card > button {
+    width: 70%;
 }
