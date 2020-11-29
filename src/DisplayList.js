@@ -29,6 +29,7 @@ class DisplayList extends Component {
         }
 
         return (
+            // MUST ADD LIST OF AGGREGATED ITEMS SOMEWHERE ON THE PAGE AND DEVELOPER COMMENTS
             
             <div className="main-container">
                 <div className="aggregate-announce">
