@@ -64,7 +64,7 @@ select {
     height: 20px;
 }
 
-h1, h2, .menu-bar, span, p {
+h1, h2, h3, .menu-bar, span, p {
     font-family: 'Cairo', sans-serif;
     color: #FFB200;
 }
@@ -75,7 +75,7 @@ h1, h2, .menu-bar, span, p {
 
 h1, .aggregate-announce {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     width: 50%;
     margin-left: auto;

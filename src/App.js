@@ -17,6 +17,8 @@ import Serpent from './images/Serpent.svg'
 import Tiger from './images/Tiger.svg'
 
 function App() {
+  
+  // List of all the Chinese Zodiac animals and their properties
   const productList = [
     { name: "Rat", element: "Water", alignment: "Yang", numLegs: 4, raceIndex: 1, svg: Rat},
     { name: "Ox", element: "Earth", alignment: "Yin", numLegs: 4, raceIndex: 2, svg: Ox},
@@ -32,6 +34,7 @@ function App() {
     { name: "Pig", element: "Water", alignment: "Yin", numLegs: 4, raceIndex: 12, svg: Pig},
   ]
 
+  // Initial state of the displayed list is the original list of products (aka Zodiac animals)
   const [displayList, setDisplayList] = useState(productList);
 
   return (  
