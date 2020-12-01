@@ -3,11 +3,13 @@ import React, { Component } from 'react'
 class DisplayList extends Component {
     constructor(props){
         super(props);
+        // Set state of list to Ignored (aka each animal's number of legs are ignored in aggregator)
         this.state = {
             ignored: this.props.list.map(animal => animal.raceIndex)
         };
     }
 
+    // Whether or not an animal's legs should be ignored in the aggregate count
     isIgnored(raceIndex) {
         return this.state.ignored.some(item => item === raceIndex);
     }
@@ -15,7 +17,7 @@ class DisplayList extends Component {
     render() {
         const {list} = this.props;
 
-        {/* Removes an animal from aggregated list if it has already been selected. */}
+        {/* Removes an animal from aggregated list if it has already been selected, and vice versa */}
         const handleRemove = (raceIndex) => () => {
             if(this.isIgnored(raceIndex)) {
                 this.setState({
@@ -55,7 +57,7 @@ class DisplayList extends Component {
                 </div>
                 <br></br>
                 <div className="card-container">
-                    
+
                     {/* Each animal is mapped with its attributes. If it isn't ignored, it is highlighted to show it
                 has been selected */}
                     {list.map((item, index) =>

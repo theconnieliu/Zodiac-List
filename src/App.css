@@ -77,6 +77,7 @@ h1, .aggregate-announce {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
